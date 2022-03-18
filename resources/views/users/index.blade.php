@@ -12,9 +12,9 @@
         </div>
     </div>
 
-    @if ($message = Session::get('succes'))
+    @if ($messages = Session::get('message'))
     <div class="alert alert-success">
-        <p>{{ $message }}</p>
+        <p>{{ $messages }}</p>
     </div>
     @endif
 
@@ -38,8 +38,8 @@
                 @method('DELETE')
                 @csrf
             
-                <a href="{{ 'users/'.$user['id'] }}" class="text-primary"><i class="fa fa-fw fa-edit"></i> Edit</a> |
-                <button type="submit" class="text-danger btn btn-link" onClick="return confirm('Are you sure to delete this user?');"><i class="fa fa-fw fa-trash"></i> Delete</button>
+                <a href="{{ 'users/'.$user['id'] }}" class="text-primary"><button type="button" class="btn btn-warning">Edit</button>
+                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure to delete this user?');">Delete</button>
             </form>
         </td>
 
@@ -49,5 +49,28 @@
     @endforelse
 
     </table>
+    @if($users['total'] > $users['limit'])
+<div class="card-body">
+    @php $pages = $users['total'] / $users['limit'] @endphp
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item {{ request('page') == 1 || is_null(request('page')) ? 'disabled' : '' }}">
+                <a href="?page={{ request('page') ? request('page') - 1 : '1' }}" class="page-link" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            @for ($i = 1; $i <= $pages; $i++) <li class="page-item {{ request('page') == $i || (is_null(request('page')) && $i == 1) ? 'active' : '' }}">
+                <a class="page-link" href="?page={{ $i }}{{request('search') ? '&search=' . request('search') : ''}}">{{ $i }}</a>
+                </li>
+                @endfor
+                <li class="page-item {{ request('page') == $pages ? 'disabled' : '' }}">
+                    <a class="page-link" href="?page={{ request('page') ? request('page') + 1 : $pages - 1 }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+        </ul>
+    </nav>
+</div>
+@endif
 
 @endsection

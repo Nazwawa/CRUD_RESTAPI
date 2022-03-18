@@ -25,18 +25,28 @@
 
 <form method="post" action="{{ route('users.store')}}">
     @csrf
-    <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">First Name</label>
-        <input type="text" name="nama_depan" class="form-control" id="exampleInputPassword1">
-    </div>
-    <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Last Name</label>
-        <input type="text" name="nama_belakang" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12">
-    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
+            <div class="form-group">
+                <strong>First Name</strong>
+                <input type="text" name="nama_depan" class="form-control" placeholder="First Name" required>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
+            <div class="form-group">
+                <strong>Last Name</strong>
+                <input type="text" name="nama_belakang" class="form-control" placeholder="Last Name" required>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
+            <div class="form-group">
+                <strong>Email</strong>
+                <input type="email" name="email" class="form-control" placeholder="Email" required>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
     </div>
 </form>
 @endsection

@@ -24,7 +24,7 @@
     @endif
 
     <form method="POST" action="{{ url()->current() }}">
-        @method('PATCH')
+        @method('PUT')
         @csrf
     
         <h4>Edit User</h4>

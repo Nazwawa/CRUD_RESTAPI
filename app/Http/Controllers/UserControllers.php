@@ -105,7 +105,7 @@ class UserControllers extends Controller
      */
     public function edit($id)
     {
-        return view('users.edit', compact('users'));
+       
     }
 
     /**
@@ -130,19 +130,19 @@ class UserControllers extends Controller
     if ($response->failed()) {
         $errors = $response->json('data');
 
-        $messages = "<ul>";
+        // $messages = "<ul>";
 
-        foreach ($errors as $key => $msg) {
-            $messages .= "<li>$key : $msg</li>";
-        }
+        // foreach ($errors as $key => $msg) {
+        //     $messages .= "<li>$key : $msg</li>";
+        // }
 
-        $messages .= "</ul>";
+        // $messages .= "</ul>";
 
-        $request->session()->flash(
-            'message',
-            "Data gagal disimpan
-            $messages",
-        );
+        // $request->session()->flash(
+        //     'message',
+        //     "Data gagal disimpan
+        //     $messages",
+        // );
 
         return redirect('users');
     }
@@ -161,7 +161,7 @@ class UserControllers extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $response = (new BaseApi)->delete('/user', $id);
 
